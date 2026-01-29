@@ -41,8 +41,9 @@ const DayColumn: React.FC<DayColumnProps> = ({
               <div className="flex items-center gap-2 relative z-20">
                 <input 
                   autoFocus
-                  className="text-3xl font-retro text-[#439c4e] leading-none italic uppercase tracking-tighter bg-white/95 rounded-xl px-3 py-1.5 border-4 border-green-200 outline-none w-full shadow-md"
+                  className="text-3xl font-retro text-[#439c4e] leading-none italic uppercase tracking-tighter bg-white/95 rounded-xl px-3 py-1.5 border-4 border-green-200 outline-none w-full shadow-md font-korean"
                   value={title}
+                  placeholder="LOCATION"
                   onChange={e => onUpdateTitle(e.target.value.toUpperCase())}
                   onBlur={() => setIsEditingHeader(false)}
                   onKeyDown={e => e.key === 'Enter' && setIsEditingHeader(false)}
@@ -51,7 +52,7 @@ const DayColumn: React.FC<DayColumnProps> = ({
             ) : (
               <h2 className="text-5xl font-retro text-[#439c4e] leading-[0.8] italic uppercase tracking-tighter drop-shadow-[2px_2px_0px_rgba(0,0,0,0.05)] transition-all hover:scale-[1.02] relative z-0">
                 DAY {dayNum}-<br/>
-                <span className="text-3xl text-[#439c4e] opacity-90 italic font-korean">{title}</span>
+                <span className="text-3xl text-[#439c4e] opacity-90 italic font-korean">{title || 'CITY'}</span>
               </h2>
             )}
           </div>

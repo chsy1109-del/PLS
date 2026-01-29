@@ -32,7 +32,7 @@ import { generateItinerarySuggestions, getLiveExchangeRate, extractPlaceInfo } f
 
 const STORAGE_KEY_PREFIX = 'lucky_arkiv_v11_';
 
-const PixelClover = ({ className, size = 24, color = "#84cc16", opacity = 0.6 }: { className?: string; size?: number; color?: string; opacity?: number }) => (
+const PixelClover = ({ className, size = 20, color = "#84cc16", opacity = 0.6 }: { className?: string; size?: number; color?: string; opacity?: number }) => (
   <svg width={size} height={size} viewBox="0 0 10 10" className={className} style={{ opacity }}>
     <path d="M4 1h2v1h1v1h1v2H7v1H6v1H4V7H3V6H2V4h1V3h1V1z" fill={color} />
   </svg>
@@ -52,21 +52,21 @@ const InviteModal: React.FC<{ isOpen: boolean; onClose: () => void; tripId: stri
 
   return (
     <div className="fixed inset-0 z-[5000] flex items-center justify-center p-4 bg-green-900/5 backdrop-blur-md">
-      <div className="w-full max-w-[280px] bg-white rounded-[2rem] border-[4px] border-[#fbcfe8] p-5 shadow-2xl animate-float text-center">
+      <div className="w-full max-w-[260px] bg-white rounded-[2rem] border-[4px] border-[#fbcfe8] p-5 shadow-2xl animate-float text-center">
         <div className="flex justify-center mb-3">
-          <div className="w-12 h-12 rounded-[1.2rem] bg-gradient-to-br from-green-400 to-yellow-300 border-2 border-white flex items-center justify-center text-white">
-            <Users size={22} />
+          <div className="w-10 h-10 rounded-[1.2rem] bg-gradient-to-br from-green-400 to-yellow-300 border-2 border-white flex items-center justify-center text-white">
+            <Users size={20} />
           </div>
         </div>
-        <h2 className="text-lg font-retro text-orange-500 mb-1 uppercase tracking-tighter">COL_LAB HUB</h2>
-        <p className="font-bubbly text-green-600 text-[9px] mb-4 leading-relaxed italic opacity-80">"Sync the reel, share the journey."</p>
+        <h2 className="text-lg font-retro text-orange-500 mb-1 uppercase tracking-tighter">HUB</h2>
+        <p className="font-bubbly text-green-600 text-[8px] mb-4 italic opacity-80">"Sync the reel."</p>
         
         <div className="bg-pink-50 p-3 rounded-[1.2rem] border-2 border-white mb-4">
           <label className="text-[7px] font-digital text-pink-300 uppercase tracking-widest block mb-1 text-left">LINK</label>
           <div className="flex gap-2">
             <input 
               readOnly 
-              className="bg-white border-2 border-[#fbcfe8] flex-1 py-1.5 px-3 rounded-full text-[8px] font-digital outline-none truncate" 
+              className="bg-white border border-[#fbcfe8] flex-1 py-1.5 px-3 rounded-full text-[8px] font-digital outline-none truncate" 
               value={shareUrl} 
             />
             <button 
@@ -80,9 +80,9 @@ const InviteModal: React.FC<{ isOpen: boolean; onClose: () => void; tripId: stri
 
         <button 
           onClick={onClose}
-          className="w-full bg-green-500 text-white font-black py-2.5 rounded-full text-[9px] tracking-widest uppercase hover:bg-green-600 transition-all border-2 border-white shadow-lg"
+          className="w-full bg-green-500 text-white font-black py-2 rounded-full text-[8px] tracking-widest uppercase hover:bg-green-600 transition-all border-2 border-white shadow-lg"
         >
-          CLOSE ARCHIVE
+          CLOSE
         </button>
       </div>
     </div>
@@ -115,23 +115,23 @@ const AddPlaceModal: React.FC<{ isOpen: boolean; onClose: () => void; onAdd: (da
   return (
     <div className="fixed inset-0 z-[3000] flex items-center justify-center p-4 bg-green-900/5 backdrop-blur-sm">
       <div className="w-full max-w-[320px] bg-white rounded-[2rem] border-[4px] border-[#fbcfe8] p-5 shadow-2xl animate-float">
-        <div className="flex justify-between items-center mb-3">
-          <h3 className="text-lg font-retro text-green-600">NEW_FRAME</h3>
-          <button onClick={onClose} className="text-pink-300 hover:scale-110 transition-transform"><X size={16} /></button>
+        <div className="flex justify-between items-center mb-4">
+          <h3 className="text-xl font-retro text-green-600">NEW_FRAME</h3>
+          <button onClick={onClose} className="text-pink-300 hover:scale-110 transition-transform"><X size={18} /></button>
         </div>
-        <form onSubmit={handleSubmit} className="space-y-3">
-          <p className="text-[8px] font-digital text-green-400 uppercase tracking-widest leading-relaxed">
-            PASTE LINK FOR AUTO ARCHIVING.
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <p className="text-[9px] font-digital text-green-400 uppercase tracking-widest leading-relaxed">
+            PASTE LINK OR NAME FOR AUTO ARCHIVING.
           </p>
           <input 
             autoFocus
-            className="w-full bg-green-50/50 border-2 border-[#fbcfe8] py-2 px-4 rounded-lg font-bubbly text-green-900 outline-none focus:border-green-400 text-xs"
-            placeholder="Search or Paste Link..."
+            className="w-full bg-green-50/50 border-2 border-[#fbcfe8] py-3 px-5 rounded-xl font-korean text-green-900 outline-none focus:border-green-400 text-sm shadow-inner"
+            placeholder="Place name or URL..."
             value={input}
             onChange={e => setInput(e.target.value)}
           />
-          <button type="submit" disabled={loading} className="w-full bg-green-500 text-white font-black py-2.5 rounded-full flex items-center justify-center gap-2 hover:bg-green-600 transition-all border-2 border-white shadow-lg text-[10px]">
-            {loading ? <Loader2 size={14} className="animate-spin" /> : <Sparkles size={14} />}
+          <button type="submit" disabled={loading} className="w-full bg-green-500 text-white font-black py-3 rounded-full flex items-center justify-center gap-2 hover:bg-green-600 transition-all border-2 border-white shadow-lg text-[11px] uppercase tracking-widest">
+            {loading ? <Loader2 size={16} className="animate-spin" /> : <Sparkles size={16} />}
             {loading ? 'ANALYZING...' : 'CAPTURE DATA'}
           </button>
         </form>
@@ -182,7 +182,7 @@ const ReceiptModal: React.FC<{ isOpen: boolean; onClose: () => void; places: Pla
 
   return (
     <div className="fixed inset-0 z-[4000] flex items-center justify-center p-4 bg-black/30 backdrop-blur-lg overflow-y-auto">
-      <div className="w-full max-w-[360px] bg-white rounded-t-[2rem] border-x-[4px] border-t-[4px] border-[#fbcfe8] relative animate-in fade-in slide-in-from-bottom-4 duration-500 shadow-2xl">
+      <div className="w-full max-w-[340px] bg-white rounded-t-[2rem] border-x-[4px] border-t-[4px] border-[#fbcfe8] relative animate-in fade-in slide-in-from-bottom-4 duration-500 shadow-2xl">
         <div className="absolute top-3 right-5 print-hide">
           <button onClick={onClose} className="p-1 bg-pink-50 rounded-full text-pink-400 hover:bg-pink-100"><X size={16} /></button>
         </div>
@@ -202,7 +202,7 @@ const ReceiptModal: React.FC<{ isOpen: boolean; onClose: () => void; places: Pla
                   return (
                     <div key={p.id} className="flex justify-between items-center text-[9px]">
                       <div className="flex flex-col">
-                        <span className="font-bold text-slate-800 uppercase tracking-tighter truncate max-w-[120px]">{p.name}</span>
+                        <span className="font-bold text-slate-800 uppercase tracking-tighter truncate max-w-[120px] font-korean">{p.name}</span>
                         <span className="text-[6px] opacity-40 uppercase">{amount} {currency}</span>
                       </div>
                       <div className="text-right"><span>₩{Math.round(krw).toLocaleString()}</span></div>
@@ -214,7 +214,7 @@ const ReceiptModal: React.FC<{ isOpen: boolean; onClose: () => void; places: Pla
           </div>
           <div className="border-t-4 border-double border-slate-200 pt-3 flex justify-between items-end">
              <div className="flex flex-col">
-                <span className="text-[8px] font-black uppercase text-green-500">Grand Total</span>
+                <span className="text-[8px] font-black uppercase text-green-500">Total</span>
                 <span className="text-[6px] opacity-40 uppercase tracking-widest">{loading ? 'SYNCING...' : 'SYNCED'}</span>
              </div>
              <div className="text-right"><div className="text-xl font-retro text-orange-500 leading-none">₩{Math.round(totalKRW).toLocaleString()}</div></div>
@@ -363,8 +363,9 @@ export default function App() {
       // Clean up AI suggestions to ensure placeholders don't look like final text
       const cleaned = suggestions.map(s => ({
         ...s,
-        transport: s.transport?.toLowerCase().includes('estimated') ? '' : s.transport,
-        cost: s.cost?.toLowerCase().includes('estimated') ? '' : s.cost
+        transport: (s.transport || '').toLowerCase().includes('estimated') ? '' : s.transport,
+        cost: (s.cost || '').toLowerCase().includes('estimated') ? '' : s.cost,
+        description: (s.description || '').toLowerCase().includes('no description') ? '' : s.description
       }));
       setPlaces(prev => [...prev, ...cleaned]);
     } finally {
@@ -381,36 +382,36 @@ export default function App() {
         <div className="absolute top-4 left-4 text-[6px] font-digital uppercase tracking-[0.3em] text-green-900/40 z-10">STUDIO: ARKIV</div>
         <div className="absolute top-4 right-4 text-[6px] font-digital uppercase tracking-[0.3em] text-green-900/40 z-10">CORE: V11.0</div>
 
-        <div className="w-full max-w-2xl flex flex-col items-center gap-4 z-20">
+        <div className="w-full max-w-xl flex flex-col items-center gap-4 z-20">
           <div className="relative text-center">
-            <div className="font-script text-orange-500 absolute top-[-1.5rem] left-1/2 transform -translate-x-1/2 text-[2.5rem] md:text-[3rem] z-30 pointer-events-none drop-shadow-[2px_2px_0px_#fff]">Lucky</div>
-            <h1 className="text-[5rem] md:text-[7.5rem] arkiv-logo-3d leading-none italic select-none">ARKIV</h1>
-            <div className="text-orange-500 text-[7px] font-black tracking-[1.2em] uppercase -mt-3 mb-6 flex justify-center w-full">MEMORIES ARCHIVE</div>
+            <div className="font-script text-orange-500 absolute top-[-1.2rem] left-1/2 transform -translate-x-1/2 text-[2.2rem] md:text-[2.8rem] z-30 pointer-events-none drop-shadow-[2px_2px_0px_#fff]">Lucky</div>
+            <h1 className="text-[4.5rem] md:text-[6.5rem] arkiv-logo-3d leading-none italic select-none">ARKIV</h1>
+            <div className="text-orange-500 text-[6px] font-black tracking-[1em] uppercase -mt-2 mb-4 flex justify-center w-full">MEMORIES ARCHIVE</div>
           </div>
 
-          <div className="flex flex-col md:flex-row items-center gap-6 w-full max-w-lg px-4">
-             <div className="w-24 h-24 rounded-[1.8rem] bg-gradient-to-br from-[#bef264] to-[#f59e0b] flex items-center justify-center text-white animate-float shadow-lg flex-shrink-0 border-[4px] border-white">
-                <Plane size={48} strokeWidth={1.5} />
+          <div className="flex flex-col md:flex-row items-center gap-5 w-full max-md px-4">
+             <div className="w-20 h-20 rounded-[1.5rem] bg-gradient-to-br from-[#bef264] to-[#f59e0b] flex items-center justify-center text-white animate-float shadow-lg flex-shrink-0 border-[3px] border-white">
+                <Plane size={38} strokeWidth={1.5} />
              </div>
 
-             <div className="flex-1 space-y-3">
-                <p className="font-bubbly text-green-800 text-base font-bold leading-tight uppercase tracking-tight max-w-[200px]">
-                  BOLD ROOTS. <br/> LAUNCH YOUR REEL.
+             <div className="flex-1 space-y-2.5">
+                <p className="font-bubbly text-green-800 text-sm font-bold leading-tight uppercase tracking-tight max-w-[180px]">
+                  BOLD ROOTS. <br/> LAUNCH REEL.
                 </p>
                 
-                <form onSubmit={e => { e.preventDefault(); handleLaunch(); }} className="flex flex-col gap-3 w-full">
+                <form onSubmit={e => { e.preventDefault(); handleLaunch(); }} className="flex flex-col gap-2.5 w-full">
                   <div className="relative">
                     <input 
                       required 
                       placeholder="DESTINATION..." 
-                      className="w-full bg-white border-[3px] border-[#fbcfe8] py-3 px-6 rounded-full text-green-900 text-base font-retro italic placeholder:text-[#bbf7d0] shadow-lg focus:shadow-green-50 focus:outline-none transition-all placeholder:not-italic" 
+                      className="w-full bg-white border-[2px] border-[#fbcfe8] py-2.5 px-6 rounded-full text-green-900 text-sm font-retro italic placeholder:text-[#bbf7d0] shadow-md focus:shadow-green-50 focus:outline-none transition-all placeholder:not-italic font-korean" 
                       value={tempDest} 
                       onChange={e => setTempDest(e.target.value)} 
                     />
                   </div>
                   
-                  <button type="submit" className="bg-[#86efac] hover:bg-[#4ade80] text-white font-black px-8 py-3 rounded-full text-base uppercase transition-all shadow-md active:scale-95 border-[3px] border-white flex items-center justify-center gap-2 w-max group">
-                    LAUNCH <ArrowRight size={20} strokeWidth={3} className="group-hover:translate-x-1 transition-transform" />
+                  <button type="submit" className="bg-[#86efac] hover:bg-[#4ade80] text-white font-black px-6 py-2.5 rounded-full text-sm uppercase transition-all shadow-md active:scale-95 border-[2px] border-white flex items-center justify-center gap-2 w-max group">
+                    LAUNCH <ArrowRight size={18} strokeWidth={3} className="group-hover:translate-x-1 transition-transform" />
                   </button>
                 </form>
              </div>
@@ -422,31 +423,31 @@ export default function App() {
 
   return (
     <div className="min-h-screen flex flex-col font-bubbly relative bg-clover-pixel">
-      <header className="px-5 pt-6 pb-3 flex items-center justify-between sticky top-0 z-[100] glass-light print-hide">
-        <div className="flex items-center gap-6">
+      <header className="px-5 pt-5 pb-2 flex items-center justify-between sticky top-0 z-[100] glass-light print-hide">
+        <div className="flex items-center gap-5">
           <div className="relative cursor-pointer hover:scale-105 transition-transform group" onClick={() => { window.location.hash = ''; }}>
              <span className="absolute -top-3 left-0 text-[6px] font-digital text-orange-400 font-black tracking-widest">@LUCKY_STUDIO</span>
-             <h2 className="text-3xl arkiv-logo-3d">ARKIV</h2>
+             <h2 className="text-2xl arkiv-logo-3d">ARKIV</h2>
           </div>
-          <div className="hidden lg:flex flex-col border-l-2 border-[#fbcfe8] pl-5 h-8 justify-center">
-            <span className="text-[7px] font-digital text-green-600 tracking-widest uppercase font-black">REEL</span>
-            <h1 className="text-lg font-retro text-orange-500 uppercase truncate max-w-[150px] italic drop-shadow-sm">{meta.destination}</h1>
+          <div className="hidden lg:flex flex-col border-l border-[#fbcfe8] pl-5 h-7 justify-center">
+            <span className="text-[6px] font-digital text-green-600 tracking-widest uppercase font-black">REEL</span>
+            <h1 className="text-base font-retro text-orange-500 uppercase truncate max-w-[150px] italic drop-shadow-sm font-korean">{meta.destination}</h1>
           </div>
         </div>
-        <div className="flex items-center gap-3">
-          <button onClick={() => setIsInviteOpen(true)} className="px-4 py-2 bg-pink-400 text-white rounded-full border-[3px] border-white hover:scale-110 transition-all text-[10px] font-black tracking-widest uppercase flex items-center gap-2 shadow-md">
-            <Users size={14} /> COLLAB
+        <div className="flex items-center gap-2.5">
+          <button onClick={() => setIsInviteOpen(true)} className="px-3 py-1.5 bg-pink-400 text-white rounded-full border-[2px] border-white hover:scale-110 transition-all text-[9px] font-black tracking-widest uppercase flex items-center gap-2 shadow-md">
+            <Users size={12} /> COLLAB
           </button>
-          <button onClick={() => setIsReceiptOpen(true)} className="px-4 py-2 bg-green-500 text-white rounded-full border-[3px] border-white hover:scale-110 transition-all text-[10px] font-black tracking-widest uppercase flex items-center gap-2 shadow-md">
-            <Receipt size={14} /> SETTLE
+          <button onClick={() => setIsReceiptOpen(true)} className="px-3 py-1.5 bg-green-500 text-white rounded-full border-[2px] border-white hover:scale-110 transition-all text-[9px] font-black tracking-widest uppercase flex items-center gap-2 shadow-md">
+            <Receipt size={12} /> SETTLE
           </button>
-          <button onClick={() => window.print()} className="bg-orange-400 text-white font-black px-6 py-2 rounded-full text-[10px] tracking-widest uppercase hover:scale-110 transition-all shadow-md border-[3px] border-white flex items-center gap-2">
-            <Download size={14} /> EXPORT
+          <button onClick={() => window.print()} className="bg-orange-400 text-white font-black px-5 py-1.5 rounded-full text-[9px] tracking-widest uppercase hover:scale-110 transition-all shadow-md border-[2px] border-white flex items-center gap-2">
+            <Download size={12} /> EXPORT
           </button>
         </div>
       </header>
 
-      <main className="flex-1 overflow-x-auto custom-scrollbar px-6 py-8 relative z-10 flex h-full items-start gap-6 print:block">
+      <main className="flex-1 overflow-x-auto custom-scrollbar px-5 py-6 relative z-10 flex h-full items-start gap-5 print:block">
         <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
           {Array.from({ length: meta.duration }, (_, i) => i + 1).map((dayNum) => (
             <DayColumn 
@@ -459,11 +460,11 @@ export default function App() {
               removePlace={removePlace} 
               generateAI={generateAI} 
               isGenerating={isGenerating[dayNum]} 
-              title={meta.dayTitles?.[dayNum] || 'CITY'}
+              title={meta.dayTitles?.[dayNum] ?? ''} 
               onUpdateTitle={(val) => updateDayTitle(dayNum, val)}
             />
           ))}
-          <button onClick={() => setMeta(p => p ? { ...p, duration: p.duration + 1 } : null)} className="flex-none w-14 h-[280px] bg-white/40 backdrop-blur-sm rounded-[2rem] border-[3px] border-dashed border-[#fbcfe8] hover:border-green-400 flex items-center justify-center text-pink-300 hover:text-green-500 transition-all shadow-sm print-hide mt-8"><Plus size={36} className="rotate-90" /></button>
+          <button onClick={() => setMeta(p => p ? { ...p, duration: p.duration + 1 } : null)} className="flex-none w-12 h-[240px] bg-white/40 backdrop-blur-sm rounded-[1.8rem] border-[3px] border-dashed border-[#fbcfe8] hover:border-green-400 flex items-center justify-center text-pink-300 hover:text-green-500 transition-all shadow-sm print-hide mt-8"><Plus size={32} className="rotate-90" /></button>
         </DndContext>
       </main>
 
@@ -471,22 +472,22 @@ export default function App() {
       <InviteModal isOpen={isInviteOpen} onClose={() => setIsInviteOpen(false)} tripId={tripId} />
       <ReceiptModal isOpen={isReceiptOpen} onClose={() => setIsReceiptOpen(false)} places={places} />
       
-      <footer className="px-8 py-3 border-t-[3px] border-[#fbcfe8] bg-white/40 backdrop-blur-md flex items-center justify-between z-50 print-hide">
-         <div className="flex items-center gap-5">
-            <span className="text-[9px] font-digital text-green-600 uppercase tracking-[0.2em] font-black">STABILITY</span>
-            <div className="w-48 h-2.5 bg-white rounded-full overflow-hidden border border-[#fbcfe8] shadow-inner">
+      <footer className="px-6 py-2 border-t-[2px] border-[#fbcfe8] bg-white/40 backdrop-blur-md flex items-center justify-between z-50 print-hide">
+         <div className="flex items-center gap-4">
+            <span className="text-[8px] font-digital text-green-600 uppercase tracking-[0.1em] font-black">SYNC</span>
+            <div className="w-32 h-2 bg-white rounded-full overflow-hidden border border-[#fbcfe8] shadow-inner">
                <div className="h-full bg-gradient-to-r from-green-300 to-green-500 rounded-full transition-all duration-700" style={{ width: `${places.length > 0 ? (places.filter(p => p.visited).length / (places.length as number)) * 100 : 0}%` }} />
             </div>
          </div>
-         <div className="flex items-center gap-5">
+         <div className="flex items-center gap-4">
             {tripId && (
-              <div className="flex items-center gap-2.5 bg-pink-100/60 px-3 py-1 rounded-full border border-white shadow-sm">
-                <div className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse" />
-                <span className="text-[9px] font-black uppercase text-pink-500">Live</span>
+              <div className="flex items-center gap-2 bg-pink-100/60 px-2.5 py-1 rounded-full border border-white shadow-sm">
+                <div className="w-1 h-1 bg-green-500 rounded-full animate-pulse" />
+                <span className="text-[8px] font-black uppercase text-pink-500">Live</span>
               </div>
             )}
-            <PixelClover size={16} color="#84cc16" opacity={0.7} />
-            <span className="text-[9px] font-black tracking-[0.1em] uppercase text-pink-400">ARKIV v11</span>
+            <PixelClover size={14} color="#84cc16" opacity={0.7} />
+            <span className="text-[8px] font-black tracking-[0.1em] uppercase text-pink-400">v11</span>
          </div>
       </footer>
     </div>

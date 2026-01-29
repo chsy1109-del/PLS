@@ -1,4 +1,3 @@
-
 import { GoogleGenAI, Type } from "@google/genai";
 import { Place } from "../types";
 
@@ -7,7 +6,7 @@ const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 export const generateItinerarySuggestions = async (destination: string, day: number): Promise<Place[]> => {
   const response = await ai.models.generateContent({
     model: "gemini-3-flash-preview",
-    contents: `Suggest 3-4 must-visit places for Day ${day} of a trip to ${destination}. Provide realistic transport info and estimated costs in local currency or USD.`,
+    contents: `Suggest 3-4 must-visit places for Day ${day} of a trip to ${destination}. Provide realistic transport info and estimated costs. If any information like cost or transport is unknown, return an empty string "" for that field instead of filler text.`,
     config: {
       responseMimeType: "application/json",
       responseSchema: {
@@ -39,7 +38,7 @@ export const generateItinerarySuggestions = async (destination: string, day: num
 export const extractPlaceInfo = async (input: string): Promise<Partial<Place>> => {
   const response = await ai.models.generateContent({
     model: "gemini-3-flash-preview",
-    contents: `Extract information about the place mentioned in this text: "${input}". Provide name, category, short description, transport tips, and estimated cost.`,
+    contents: `Extract information about the place mentioned in this text: "${input}". Return a JSON object with name, category, description, transport tips, and estimated cost. CRITICAL: If any field (especially cost, transport, or description) is generic, unavailable, or unknown, return an empty string "" instead of filler words like "Estimated" or "N/A".`,
     config: {
       responseMimeType: "application/json",
       responseSchema: {

@@ -101,7 +101,7 @@ export const PlaceCard: React.FC<PlaceCardProps> = ({ place, toggleVisited, upda
             <div className="bg-gradient-to-br from-pink-50/30 to-white p-3 rounded-[1.2rem] border border-white space-y-1.5 shadow-xs">
               <div className="flex items-center gap-1.5"><Music size={12} className="text-pink-400" /><label className="text-[8px] font-digital text-pink-400 uppercase tracking-widest">SONIC</label></div>
               <div className="flex gap-2">
-                <input className="bg-transparent flex-1 outline-none font-bubbly text-pink-900 text-[10px] placeholder:text-pink-100" value={place.musicLink || ''} onChange={(e) => updateMemo(place.id, 'musicLink', e.target.value)} placeholder="SEARCH..." />
+                <input className="bg-transparent flex-1 outline-none font-korean text-pink-900 text-[10px] placeholder:text-pink-100" value={place.musicLink || ''} onChange={(e) => updateMemo(place.id, 'musicLink', e.target.value)} placeholder="SEARCH..." />
                 {place.musicLink && <a href={place.musicLink} target="_blank" rel="noreferrer" className="bg-white p-1 rounded-md text-pink-400 hover:scale-105"><ExternalLink size={12} /></a>}
               </div>
             </div>
@@ -109,16 +109,16 @@ export const PlaceCard: React.FC<PlaceCardProps> = ({ place, toggleVisited, upda
             <div className="grid grid-cols-2 gap-2">
               <div className="bg-green-50/20 p-3 rounded-[1.2rem] border border-white">
                 <label className="text-[7px] font-digital text-green-600 uppercase tracking-widest block mb-0.5">LOGS</label>
-                <input className="bg-transparent w-full outline-none font-bubbly text-green-900 text-[9px] italic font-korean" value={place.transport || ''} onChange={(e) => updateMemo(place.id, 'transport', e.target.value)} placeholder="" />
+                <input className="bg-transparent w-full outline-none font-korean text-green-900 text-[9px] italic" value={place.transport || ''} onChange={(e) => updateMemo(place.id, 'transport', e.target.value)} placeholder="" />
               </div>
               <div className="bg-orange-50/20 p-3 rounded-[1.2rem] border border-white">
                 <label className="text-[7px] font-digital text-orange-600 uppercase tracking-widest block mb-0.5">COST</label>
-                <input className="bg-transparent w-full outline-none font-bubbly text-orange-900 text-[9px] font-bold font-korean" value={place.cost || ''} onChange={(e) => updateMemo(place.id, 'cost', e.target.value)} placeholder="" />
+                <input className="bg-transparent w-full outline-none font-korean text-orange-900 text-[9px] font-bold" value={place.cost || ''} onChange={(e) => updateMemo(place.id, 'cost', e.target.value)} placeholder="" />
               </div>
             </div>
 
             <div className="bg-white p-3 rounded-[1.5rem] border border-[#fbcfe8] relative shadow-xs">
-               <textarea className="bg-transparent w-full outline-none text-slate-700 leading-normal font-bubbly text-[10px] resize-none custom-scrollbar font-korean" rows={3} value={place.description || ''} onChange={(e) => updateMemo(place.id, 'description', e.target.value)} placeholder="" />
+               <textarea className="bg-transparent w-full outline-none text-slate-700 leading-normal font-korean text-[10px] resize-none custom-scrollbar" rows={3} value={place.description || ''} onChange={(e) => updateMemo(place.id, 'description', e.target.value)} placeholder="" />
                <div className="flex gap-1.5 absolute bottom-1.5 right-3 print-hide">
                   <button onClick={async (e) => { e.stopPropagation(); setLoadingTranslate(true); try { const res = await translateText(place.description); updateMemo(place.id, 'description', res); } finally { setLoadingTranslate(false); } }} className="bg-white p-1 rounded-md text-pink-100 hover:text-green-500 border border-pink-50">{loadingTranslate ? <Loader2 size={10} className="animate-spin" /> : <Languages size={12} />}</button>
                   <button onClick={async (e) => { e.stopPropagation(); setLoadingTip(true); try { const tip = await getQuickTip(place.name); updateMemo(place.id, 'description', `${place.description}\n\n✨ TIP: ${tip}`.trim()); } finally { setLoadingTip(false); } }} className="bg-white p-1 rounded-md text-pink-100 hover:text-orange-500 border border-pink-50">{loadingTip ? <Loader2 size={10} className="animate-spin" /> : <Sparkles size={12} />}</button>
