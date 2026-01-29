@@ -518,8 +518,9 @@ export default function App() {
 
         <div className="w-full max-w-xl flex flex-col items-center gap-4 z-20">
           <div className="relative text-center">
-            <div className="font-script text-orange-500 absolute top-[-1.2rem] left-1/2 transform -translate-x-1/2 text-[2.2rem] md:text-[2.8rem] z-30 pointer-events-none drop-shadow-[1px_1px_0px_#fff]">Lucky</div>
-            <h1 className="text-[4.5rem] md:text-[6.5rem] arkiv-logo-3d leading-none italic select-none">ARKIV</h1>
+            {/* "Lucky" moved higher to top-[-4.2rem] to avoid overlapping logo effects and ensure clear visibility */}
+            <div className="font-script text-orange-500 absolute top-[-4.2rem] left-1/2 transform -translate-x-1/2 text-[2.2rem] md:text-[2.8rem] z-30 pointer-events-none drop-shadow-[1px_1px_0px_#fff]">Lucky</div>
+            <h1 className="text-[4.5rem] md:text-[6.5rem] arkiv-logo-3d italic select-none">ARKIV</h1>
             <div className="text-orange-500 text-[6px] font-black tracking-[1em] uppercase -mt-2 mb-4 flex justify-center w-full">MEMORIES ARCHIVE</div>
           </div>
 
@@ -561,7 +562,7 @@ export default function App() {
         <div className="flex items-center gap-5">
           <div className="relative cursor-pointer hover:scale-105 transition-transform group" onClick={() => { window.location.hash = ''; }}>
              <span className="absolute -top-3 left-0 text-[6px] font-digital text-orange-400 font-black tracking-widest">@LUCKY_STUDIO</span>
-             <h2 className="text-2xl arkiv-logo-3d">ARKIV</h2>
+             <h2 className="text-2xl arkiv-logo-3d italic">ARKIV</h2>
           </div>
           <div className="hidden lg:flex flex-col border-l border-[#fbcfe8] pl-5 h-7 justify-center">
             <span className="text-[6px] font-digital text-green-600 tracking-widest uppercase font-black">REEL</span>
