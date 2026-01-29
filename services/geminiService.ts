@@ -6,7 +6,7 @@ const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 export const generateItinerarySuggestions = async (destination: string, day: number): Promise<Place[]> => {
   const response = await ai.models.generateContent({
     model: "gemini-3-flash-preview",
-    contents: `Suggest 3-4 must-visit places for Day ${day} of a trip to ${destination}. Provide realistic transport info and estimated costs. If any information like cost or transport is unknown, return an empty string "" for that field instead of filler text.`,
+    contents: `Suggest 3 iconic places to visit for Day ${day} in ${destination}. For each place, provide a short description, transport tip, and estimated cost. If unknown, leave as empty string. Return as a JSON array.`,
     config: {
       responseMimeType: "application/json",
       responseSchema: {
@@ -38,7 +38,7 @@ export const generateItinerarySuggestions = async (destination: string, day: num
 export const extractPlaceInfo = async (input: string): Promise<Partial<Place>> => {
   const response = await ai.models.generateContent({
     model: "gemini-3-flash-preview",
-    contents: `Extract information about the place mentioned in this text: "${input}". Return a JSON object with name, category, description, transport tips, and estimated cost. CRITICAL: If any field (especially cost, transport, or description) is generic, unavailable, or unknown, return an empty string "" instead of filler words like "Estimated" or "N/A".`,
+    contents: `Extract place info from: "${input}". Provide JSON with name, category, description, transport, and cost. Use empty strings for missing data.`,
     config: {
       responseMimeType: "application/json",
       responseSchema: {
@@ -65,7 +65,7 @@ export const extractPlaceInfo = async (input: string): Promise<Partial<Place>> =
 export const getLiveExchangeRate = async (from: string, to: string): Promise<number> => {
   const response = await ai.models.generateContent({
     model: "gemini-3-flash-preview",
-    contents: `What is the current exchange rate from ${from} to ${to}? Use Google Search for real-time data. Return ONLY the number value of the rate.`,
+    contents: `What is the exchange rate from ${from} to ${to}? Use Google Search. Return ONLY the number.`,
     config: {
       tools: [{ googleSearch: {} }],
     },
@@ -79,16 +79,16 @@ export const getLiveExchangeRate = async (from: string, to: string): Promise<num
 export const getQuickTip = async (placeName: string): Promise<string> => {
   const response = await ai.models.generateContent({
     model: "gemini-3-flash-preview",
-    contents: `Give me a one-sentence pro-tip for visiting ${placeName}.`,
+    contents: `Give me a very short travel tip for ${placeName} in one sentence.`,
   });
-  return response.text || "No tips found.";
+  return response.text?.trim() || "No tips found.";
 };
 
 export const translateText = async (text: string, targetLanguage: string = "Korean"): Promise<string> => {
   if (!text.trim()) return "";
   const response = await ai.models.generateContent({
     model: "gemini-3-flash-preview",
-    contents: `Translate the following text to ${targetLanguage}. Text: "${text}"`,
+    contents: `Translate this text to ${targetLanguage}: "${text}". Return only the translated string.`,
   });
   return response.text?.trim() || text;
 };

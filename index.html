@@ -12,7 +12,7 @@
         :root {
             --arkiv-green: #22c55e;
             --arkiv-orange: #f97316;
-            --arkiv-lemon: #f7fee7;
+            --arkiv-lemon: #fdfdfa;
             --arkiv-pink-border: #fbcfe8;
             --metallic-grey: #94a3b8; 
             --dark-block-shadow: #334155;
@@ -33,7 +33,6 @@
         .font-digital { font-family: 'Courier Prime', monospace; font-weight: 700; }
         .font-korean { font-family: 'Bagel Fat One', cursive; }
 
-        /* ARKIV 3D Metallic Logo - Refined to prevent "V" clipping */
         .arkiv-logo-3d {
             font-family: 'Shrikhand', cursive;
             background: linear-gradient(to bottom, 
@@ -46,32 +45,32 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             filter: 
-                drop-shadow(1.5px 0 0 #fff) 
-                drop-shadow(-1.5px 0 0 #fff) 
-                drop-shadow(0 1.5px 0 #fff) 
-                drop-shadow(0 -1.5px 0 #fff)
-                drop-shadow(2px 0 0 var(--metallic-grey))
-                drop-shadow(-2px 0 0 var(--metallic-grey))
-                drop-shadow(0 2px 0 var(--metallic-grey))
-                drop-shadow(0 -2px 0 var(--metallic-grey))
-                drop-shadow(0 7px 0 var(--dark-block-shadow));
+                drop-shadow(1px 0 0 #fff) 
+                drop-shadow(-1px 0 0 #fff) 
+                drop-shadow(0 1px 0 #fff) 
+                drop-shadow(0 -1px 0 #fff)
+                drop-shadow(1px 0 0 var(--metallic-grey))
+                drop-shadow(-1px 0 0 var(--metallic-grey))
+                drop-shadow(0 1px 0 var(--metallic-grey))
+                drop-shadow(0 -1px 0 var(--metallic-grey))
+                drop-shadow(0 4px 0 var(--dark-block-shadow));
             display: inline-block;
             line-height: 1;
             font-style: italic;
-            padding-bottom: 14px;
-            padding-left: 8px;
-            padding-right: 20px;
-            padding-top: 6px;
+            padding-bottom: 8px;
+            padding-left: 4px;
+            padding-right: 12px;
+            padding-top: 4px;
             overflow: visible;
         }
 
         .glass-light {
-            background: rgba(247, 254, 231, 0.95);
+            background: rgba(255, 255, 255, 0.9);
             backdrop-filter: blur(12px);
-            border-bottom: 3px solid var(--arkiv-pink-border);
+            border-bottom: 1px solid var(--arkiv-pink-border);
         }
 
-        .custom-scrollbar::-webkit-scrollbar { width: 5px; }
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
         .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
         .custom-scrollbar::-webkit-scrollbar-thumb {
             background: var(--arkiv-pink-border);
@@ -80,48 +79,23 @@
 
         @keyframes float {
             0% { transform: translateY(0px); }
-            50% { transform: translateY(-6px); }
+            50% { transform: translateY(-4px); }
             100% { transform: translateY(0px); }
         }
         .animate-float { animation: float 6s ease-in-out infinite; }
-        
-        .bg-clover-pixel {
-            background-image: url("data:image/svg+xml,%3Csvg width='70' height='70' viewBox='0 0 10 10' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M4 1h2v1h1v1h1v2H7v1H6v1H4V7H3V6H2V4h1V3h1V1z' fill='%2384cc16' opacity='0.12'/%3E%3C/svg%3E");
-            background-repeat: repeat;
-        }
 
-        .landing-shape-left {
-            position: absolute;
-            top: -20px;
-            left: -20px;
-            width: 250px;
-            height: 250px;
-            background: #bef264;
-            opacity: 0.55;
-            clip-path: polygon(0 0, 100% 0, 100% 50%, 65% 50%, 65% 100%, 0 100%);
-            z-index: 0;
-            pointer-events: none;
-        }
-
-        .landing-shape-right {
-            position: absolute;
-            bottom: 25px;
-            right: 25px;
-            width: 200px;
-            height: 200px;
-            border: 30px solid #fde047;
-            opacity: 0.35;
-            clip-path: polygon(0% 100%, 100% 100%, 100% 0%, 70% 0%, 70% 30%, 30% 30%, 30% 70%, 0% 70%);
-            z-index: 0;
-            pointer-events: none;
+        .planning-bg {
+            background: linear-gradient(135deg, rgba(187, 247, 208, 0.6) 0%, rgba(220, 252, 231, 0.6) 100%);
+            min-height: 100vh;
         }
 
         @media print {
             .print-hide { display: none !important; }
-            .bg-clover-pixel { background-image: none !important; background-color: white !important; }
+            body { background-color: white !important; }
+            .planning-bg { background: white !important; }
             header, footer { display: none !important; }
-            main { display: block !important; padding: 0 !important; }
-            .flex-none { width: 100% !important; border: none !important; box-shadow: none !important; margin-bottom: 1.5rem !important; }
+            main { display: flex !important; flex-wrap: wrap !important; padding: 20px !important; }
+            .flex-none { width: 32% !important; border: 1px solid #ddd !important; box-shadow: none !important; margin: 5px !important; border-radius: 1rem !important; }
         }
     </style>
 <script type="importmap">
@@ -134,12 +108,13 @@
     "@dnd-kit/sortable": "https://esm.sh/@dnd-kit/sortable@^10.0.0",
     "@dnd-kit/utilities": "https://esm.sh/@dnd-kit/utilities@^3.2.2",
     "lucide-react": "https://esm.sh/lucide-react@^0.562.0",
-    "@dnd-kit/core": "https://esm.sh/@dnd-kit/core@^6.3.1"
+    "@dnd-kit/core": "https://esm.sh/@dnd-kit/core@^6.3.1",
+    "html2canvas": "https://esm.sh/html2canvas@^1.4.1"
   }
 }
 </script>
 </head>
-<body class="bg-clover-pixel">
+<body>
     <div id="root"></div>
     <script type="module" src="index.tsx"></script>
 </body>
