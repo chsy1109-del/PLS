@@ -1,0 +1,8 @@
+{
+  "name": "Copy of Copy of Copy of ARKIV | Digital Memory Archive",
+  "description": "An AI-powered travel itinerary planner with smart suggestions, photo archiving, and music integration.",
+  "requestFramePermissions": [
+    "geolocation",
+    "camera"
+  ]
+}

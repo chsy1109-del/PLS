@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lucky ARKIV | Retro Memories</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Grandstander:ital,wght@0,100..900;1,100..900&family=Shrikhand&family=Courier+Prime:wght@400;700&family=Pacifico&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --arkiv-green: #22c55e;
+            --arkiv-orange: #f97316;
+            --arkiv-lemon: #f7fee7;
+            --arkiv-pink-border: #fbcfe8;
+            --metallic-grey: #94a3b8; 
+            --dark-block-shadow: #334155;
+        }
+        
+        body {
+            font-family: 'Grandstander', 'Bagel Fat One', cursive;
+            background-color: var(--arkiv-lemon);
+            color: #166534;
+            margin: 0;
+            overflow-x: hidden;
+            min-height: 100vh;
+            font-size: 0.85rem;
+        }
+
+        .font-retro { font-family: 'Shrikhand', 'Bagel Fat One', cursive; }
+        .font-script { font-family: 'Pacifico', cursive; }
+        .font-digital { font-family: 'Courier Prime', monospace; font-weight: 700; }
+        .font-korean { font-family: 'Bagel Fat One', cursive; }
+
+        /* ARKIV 3D Metallic Logo - Refined to prevent "V" clipping */
+        .arkiv-logo-3d {
+            font-family: 'Shrikhand', cursive;
+            background: linear-gradient(to bottom, 
+                #ffffff 0%, 
+                #f0fdf4 35%, 
+                #4ade80 48%, 
+                #22c55e 55%, 
+                #bbf7d0 100%
+            );
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: 
+                drop-shadow(1.5px 0 0 #fff) 
+                drop-shadow(-1.5px 0 0 #fff) 
+                drop-shadow(0 1.5px 0 #fff) 
+                drop-shadow(0 -1.5px 0 #fff)
+                drop-shadow(2px 0 0 var(--metallic-grey))
+                drop-shadow(-2px 0 0 var(--metallic-grey))
+                drop-shadow(0 2px 0 var(--metallic-grey))
+                drop-shadow(0 -2px 0 var(--metallic-grey))
+                drop-shadow(0 7px 0 var(--dark-block-shadow));
+            display: inline-block;
+            line-height: 1;
+            font-style: italic;
+            padding-bottom: 14px;
+            padding-left: 8px;
+            padding-right: 20px;
+            padding-top: 6px;
+            overflow: visible;
+        }
+
+        .glass-light {
+            background: rgba(247, 254, 231, 0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 3px solid var(--arkiv-pink-border);
+        }
+
+        .custom-scrollbar::-webkit-scrollbar { width: 5px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: var(--arkiv-pink-border);
+            border-radius: 20px;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-6px); }
+            100% { transform: translateY(0px); }
+        }
+        .animate-float { animation: float 6s ease-in-out infinite; }
+        
+        .bg-clover-pixel {
+            background-image: url("data:image/svg+xml,%3Csvg width='70' height='70' viewBox='0 0 10 10' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M4 1h2v1h1v1h1v2H7v1H6v1H4V7H3V6H2V4h1V3h1V1z' fill='%2384cc16' opacity='0.12'/%3E%3C/svg%3E");
+            background-repeat: repeat;
+        }
+
+        .landing-shape-left {
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            width: 250px;
+            height: 250px;
+            background: #bef264;
+            opacity: 0.55;
+            clip-path: polygon(0 0, 100% 0, 100% 50%, 65% 50%, 65% 100%, 0 100%);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .landing-shape-right {
+            position: absolute;
+            bottom: 25px;
+            right: 25px;
+            width: 200px;
+            height: 200px;
+            border: 30px solid #fde047;
+            opacity: 0.35;
+            clip-path: polygon(0% 100%, 100% 100%, 100% 0%, 70% 0%, 70% 30%, 30% 30%, 30% 70%, 0% 70%);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        @media print {
+            .print-hide { display: none !important; }
+            .bg-clover-pixel { background-image: none !important; background-color: white !important; }
+            header, footer { display: none !important; }
+            main { display: block !important; padding: 0 !important; }
+            .flex-none { width: 100% !important; border: none !important; box-shadow: none !important; margin-bottom: 1.5rem !important; }
+        }
+    </style>
+<script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@^19.2.3",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "@google/genai": "https://esm.sh/@google/genai@^1.37.0",
+    "@dnd-kit/sortable": "https://esm.sh/@dnd-kit/sortable@^10.0.0",
+    "@dnd-kit/utilities": "https://esm.sh/@dnd-kit/utilities@^3.2.2",
+    "lucide-react": "https://esm.sh/lucide-react@^0.562.0",
+    "@dnd-kit/core": "https://esm.sh/@dnd-kit/core@^6.3.1"
+  }
+}
+</script>
+</head>
+<body class="bg-clover-pixel">
+    <div id="root"></div>
+    <script type="module" src="index.tsx"></script>
+</body>
+</html>
